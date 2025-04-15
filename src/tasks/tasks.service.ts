@@ -12,8 +12,8 @@ export class TasksService {
    createTask(title: string, description: string) {
     const task: Task = {
         id: uuid(),
-        title,
-        description,
+        title: title,
+        description: description,
         status: TaskStatus.OPEN,
     };
     this.tasks.push(task);
