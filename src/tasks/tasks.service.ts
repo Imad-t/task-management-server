@@ -30,20 +30,23 @@ export class TasksService {
         return task;// return the created task to the client
     }
 
-    deleteTask(id: string): string {
-        try {
-            const task = this.tasks.find((task) => task.id === id);
-            if (!task) {
-                throw new Error(`Task with ID "${id}" not found`);
-            }else{
+    updateTaskStatus(id: string, status: TaskStatus): void {
+        const task = this.tasks.find((task) => task.id === id);
+        if (!task) {
+            throw new Error(`Task with ID "${id}" not found`);
+        } else {
+            task.status = status; // update the status of the task
+        }
+    }
+
+    deleteTask(id: string) {
+        const task = this.tasks.find((task) => task.id === id);
+        if (!task) {
+            throw new Error(`Task with ID "${id}" not found`);
+        } else {
             this.tasks = this.tasks.filter((t) => t.id !== id);
-            return `Task with ID "${id}" deleted successfully`;
         }
-           
-        }
-        catch (error) {
-            return `Error deleting task with ID "${id}": ${error.message}`;
-        }
-    
+
+
     }
 }
