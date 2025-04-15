@@ -10,6 +10,14 @@ export class TasksService {
     return this.tasks;
    }
 
+   getTaskById(id: string): Task {
+    const task = this.tasks.find((task) => task.id === id);
+    if (!task) {
+        throw new Error(`Task with ID "${id}" not found`);
+    }
+    return task;
+   }
+
    createTask(createTaskDto: createTaskDto): Task {
     const { title, description } = createTaskDto; // destructure the properties from the DTO
     const task: Task = {
